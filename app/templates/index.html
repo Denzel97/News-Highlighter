@@ -1,1 +1,40 @@
-<h1> {{ message }} </h1>
+{% extends 'base.html'%}
+{% import 'macros.html' as macro%}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  {% if title %}
+  <title> {{ title }}</title>
+  {% else %}
+  <title> Welcome to the best News Highlighter website </title>
+  {% endif %}
+</head>
+
+<body>
+
+  <!-- Content block -->
+  {% block content %}
+
+  <!-- Popular article -->
+  <h3> Popular Articles</h3>
+  <ul>
+    {{ macro.displayArticleList(popular)}}
+  </ul>
+  <!-- Upcoming article  -->
+  <h3> Upcoming Articles </h3>
+  <ul>
+    {{ macro.displayArticleList(upcoming)}}
+  </ul>
+  <!-- Now showing article -->
+  <h3>Now Showing</h3>
+  <ul>
+    {{ macro.displayArticleList(now_showing)}}
+  </ul>
+
+  {% endblock%}
+</body>
+
+</html>
