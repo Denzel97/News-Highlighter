@@ -19,19 +19,9 @@
   {% block content %}
 
   <!-- Popular article -->
-  <h3> Popular Articles</h3>
+  <h3> News</h3>
   <ul>
-    {{ macro.displayArticleList(popular)}}
-  </ul>
-  <!-- Upcoming article  -->
-  <h3> Upcoming Articles </h3>
-  <ul>
-    {{ macro.displayArticleList(upcoming)}}
-  </ul>
-  <!-- Now showing article -->
-  <h3>Now Showing</h3>
-  <ul>
-    {{ macro.displayArticleList(now_showing)}}
+    {{ macro.displayArticleList(article)}}
   </ul>
 
   {% endblock%}
