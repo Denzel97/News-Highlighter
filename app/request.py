@@ -10,11 +10,11 @@ api_key = app.config['ARTICLE_API_KEY']
 # Getting the article base url
 base_url = app.config["ARTICLES_API_BASE_URL"]
 
-def get_articles(category):
+def get_articles(id):
     '''
     Function that gets the json response to our url request
     '''
-    get_articles_url = base_url.format(category,api_key)
+    get_articles_url = base_url.format(id,api_key)
 
     with urllib.request.urlopen(get_articles_url) as url:
         get_articles_data = url.read()
@@ -22,8 +22,8 @@ def get_articles(category):
 
         article_results = None
 
-        if get_articles_response['results']:
-            article_results_list = get_articles_response['results']
+        if get_articles_response['articles']:
+            article_results_list = get_articles_response['articles']
             article_results = process_results(article_results_list)
 
 
@@ -41,15 +41,14 @@ def process_results(article_list):
     '''
     article_results = []
     for article_item in article_list:
-        id = article_item.get('id')
-        title = article_item.get('original_title')
-        overview = article_item.get('overview')
-        poster = article_item.get('poster_path')
-        vote_average = article_item.get('vote_average')
-        vote_count = article_item.get('vote_count')
+        author = article_item.get('author')
+        title = article_item.get('title')
+        description = article_item.get('description')
+        url = article_item.get('url')
+        urlToImage = article_item.get('urlToImage')
+        publishedAt = article_item.get('publishedAt')
 
-        if poster:
-            article_object = Article(id,title,overview,poster,vote_average,vote_count)
-            article_results.append(article_object)
+        article_object = Article(author,title,description,url,urlToImage,publishedAt)
+        article_results.append(article_object)
 
     return article_results
